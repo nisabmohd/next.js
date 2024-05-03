@@ -321,7 +321,7 @@ dependencies = [
 [[package]]
 name = "auto-hash-map"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#157890610d0d023cf40020b001c033c023151f02"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#81bdbae34cb99204badaa0353faf1e4caa02dbcf"
 dependencies = [
  "serde",
  "smallvec",
@@ -1932,7 +1932,7 @@ dependencies = [
  "hash32",
  "rustc_version 0.4.0",
  "serde",
- "spin",
+ "spin 0.9.8",
  "stable_deref_trait",
 ]
 
@@ -2042,6 +2042,19 @@ dependencies = [
  "tower-service",
  "tracing",
  "want",
+]
+
+[[package]]
+name = "hyper-rustls"
+version = "0.23.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1788965e61b367cd03a62950836d5cd41560c3577d90e40e0819373194d1661c"
+dependencies = [
+ "http",
+ "hyper",
+ "rustls",
+ "tokio",
+ "tokio-rustls",
 ]
 
 [[package]]
@@ -3072,7 +3085,7 @@ dependencies = [
 [[package]]
 name = "node-file-trace"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#157890610d0d023cf40020b001c033c023151f02"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#81bdbae34cb99204badaa0353faf1e4caa02dbcf"
 dependencies = [
  "anyhow",
  "serde",
@@ -4141,6 +4154,7 @@ dependencies = [
  "http",
  "http-body",
  "hyper",
+ "hyper-rustls",
  "hyper-tls",
  "ipnet",
  "js-sys",
@@ -4150,16 +4164,20 @@ dependencies = [
  "once_cell",
  "percent-encoding",
  "pin-project-lite",
+ "rustls",
+ "rustls-pemfile",
  "serde",
  "serde_json",
  "serde_urlencoded",
  "tokio",
  "tokio-native-tls",
+ "tokio-rustls",
  "tower-service",
  "url",
  "wasm-bindgen",
  "wasm-bindgen-futures",
  "web-sys",
+ "webpki-roots",
  "winreg",
 ]
 
@@ -4170,6 +4188,36 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "20ec2d3e3fc7a92ced357df9cebd5a10b6fb2aa1ee797bf7e9ce2f17dffc8f59"
 dependencies = [
  "bytemuck",
+]
+
+[[package]]
+name = "ring"
+version = "0.16.20"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3053cf52e236a3ed746dfc745aa9cacf1b791d846bdaf412f60a8d7d6e17c8fc"
+dependencies = [
+ "cc",
+ "libc",
+ "once_cell",
+ "spin 0.5.2",
+ "untrusted 0.7.1",
+ "web-sys",
+ "winapi",
+]
+
+[[package]]
+name = "ring"
+version = "0.17.8"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c17fa4cb658e3583423e915b9f3acc01cceaee1860e33d59ebae66adc3a2dc0d"
+dependencies = [
+ "cc",
+ "cfg-if",
+ "getrandom",
+ "libc",
+ "spin 0.9.8",
+ "untrusted 0.9.0",
+ "windows-sys 0.52.0",
 ]
 
 [[package]]
@@ -4268,6 +4316,27 @@ dependencies = [
 ]
 
 [[package]]
+name = "rustls"
+version = "0.20.9"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1b80e3dec595989ea8510028f30c408a4630db12c9cbb8de34203b89d6577e99"
+dependencies = [
+ "log",
+ "ring 0.16.20",
+ "sct",
+ "webpki",
+]
+
+[[package]]
+name = "rustls-pemfile"
+version = "1.0.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1c74cae0a4cf6ccbbf5f359f08efdf8ee7e1dc532573bf0db71968cb56b1448c"
+dependencies = [
+ "base64 0.21.4",
+]
+
+[[package]]
 name = "rustversion"
 version = "1.0.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4333,6 +4402,16 @@ name = "scopeguard"
 version = "1.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "94143f37725109f92c262ed2cf5e59bce7498c01bcc1502d7b9afe439a4e9f49"
+
+[[package]]
+name = "sct"
+version = "0.7.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "da046153aa2352493d6cb7da4b6e5c0c057d8a1d0a9aa8560baffdd945acd414"
+dependencies = [
+ "ring 0.17.8",
+ "untrusted 0.9.0",
+]
 
 [[package]]
 name = "seahash"
@@ -4786,6 +4865,12 @@ dependencies = [
  "unicode-id-start",
  "url",
 ]
+
+[[package]]
+name = "spin"
+version = "0.5.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6e63cff320ae2c57904679ba7cb63280a3dc4613885beafb148ee7bf9aa9042d"
 
 [[package]]
 name = "spin"
@@ -6610,6 +6695,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "tokio-rustls"
+version = "0.23.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c43ee83903113e03984cb9e5cebe6c04a5116269e900e3ddba8f068a62adda59"
+dependencies = [
+ "rustls",
+ "tokio",
+ "webpki",
+]
+
+[[package]]
 name = "tokio-stream"
 version = "0.1.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -6831,7 +6927,7 @@ dependencies = [
 [[package]]
 name = "turbo-tasks"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#157890610d0d023cf40020b001c033c023151f02"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#81bdbae34cb99204badaa0353faf1e4caa02dbcf"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -6862,7 +6958,7 @@ dependencies = [
 [[package]]
 name = "turbo-tasks-build"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#157890610d0d023cf40020b001c033c023151f02"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#81bdbae34cb99204badaa0353faf1e4caa02dbcf"
 dependencies = [
  "anyhow",
  "cargo-lock",
@@ -6874,7 +6970,7 @@ dependencies = [
 [[package]]
 name = "turbo-tasks-bytes"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#157890610d0d023cf40020b001c033c023151f02"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#81bdbae34cb99204badaa0353faf1e4caa02dbcf"
 dependencies = [
  "anyhow",
  "bytes",
@@ -6888,7 +6984,7 @@ dependencies = [
 [[package]]
 name = "turbo-tasks-env"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#157890610d0d023cf40020b001c033c023151f02"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#81bdbae34cb99204badaa0353faf1e4caa02dbcf"
 dependencies = [
  "anyhow",
  "dotenvs",
@@ -6902,7 +6998,7 @@ dependencies = [
 [[package]]
 name = "turbo-tasks-fetch"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#157890610d0d023cf40020b001c033c023151f02"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#81bdbae34cb99204badaa0353faf1e4caa02dbcf"
 dependencies = [
  "anyhow",
  "lazy_static",
@@ -6918,7 +7014,7 @@ dependencies = [
 [[package]]
 name = "turbo-tasks-fs"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#157890610d0d023cf40020b001c033c023151f02"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#81bdbae34cb99204badaa0353faf1e4caa02dbcf"
 dependencies = [
  "anyhow",
  "auto-hash-map",
@@ -6950,7 +7046,7 @@ dependencies = [
 [[package]]
 name = "turbo-tasks-hash"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#157890610d0d023cf40020b001c033c023151f02"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#81bdbae34cb99204badaa0353faf1e4caa02dbcf"
 dependencies = [
  "base16",
  "hex",
@@ -6962,7 +7058,7 @@ dependencies = [
 [[package]]
 name = "turbo-tasks-macros"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#157890610d0d023cf40020b001c033c023151f02"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#81bdbae34cb99204badaa0353faf1e4caa02dbcf"
 dependencies = [
  "anyhow",
  "proc-macro-error",
@@ -6975,7 +7071,7 @@ dependencies = [
 [[package]]
 name = "turbo-tasks-macros-shared"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#157890610d0d023cf40020b001c033c023151f02"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#81bdbae34cb99204badaa0353faf1e4caa02dbcf"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -6985,7 +7081,7 @@ dependencies = [
 [[package]]
 name = "turbo-tasks-malloc"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#157890610d0d023cf40020b001c033c023151f02"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#81bdbae34cb99204badaa0353faf1e4caa02dbcf"
 dependencies = [
  "mimalloc",
 ]
@@ -6993,7 +7089,7 @@ dependencies = [
 [[package]]
 name = "turbo-tasks-memory"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#157890610d0d023cf40020b001c033c023151f02"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#81bdbae34cb99204badaa0353faf1e4caa02dbcf"
 dependencies = [
  "anyhow",
  "auto-hash-map",
@@ -7018,7 +7114,7 @@ dependencies = [
 [[package]]
 name = "turbopack"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#157890610d0d023cf40020b001c033c023151f02"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#81bdbae34cb99204badaa0353faf1e4caa02dbcf"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -7048,7 +7144,7 @@ dependencies = [
 [[package]]
 name = "turbopack-binding"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#157890610d0d023cf40020b001c033c023151f02"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#81bdbae34cb99204badaa0353faf1e4caa02dbcf"
 dependencies = [
  "auto-hash-map",
  "mdxjs",
@@ -7088,7 +7184,7 @@ dependencies = [
 [[package]]
 name = "turbopack-browser"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#157890610d0d023cf40020b001c033c023151f02"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#81bdbae34cb99204badaa0353faf1e4caa02dbcf"
 dependencies = [
  "anyhow",
  "indexmap 1.9.3",
@@ -7111,7 +7207,7 @@ dependencies = [
 [[package]]
 name = "turbopack-cli-utils"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#157890610d0d023cf40020b001c033c023151f02"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#81bdbae34cb99204badaa0353faf1e4caa02dbcf"
 dependencies = [
  "anyhow",
  "clap",
@@ -7128,7 +7224,7 @@ dependencies = [
 [[package]]
 name = "turbopack-core"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#157890610d0d023cf40020b001c033c023151f02"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#81bdbae34cb99204badaa0353faf1e4caa02dbcf"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -7157,7 +7253,7 @@ dependencies = [
 [[package]]
 name = "turbopack-css"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#157890610d0d023cf40020b001c033c023151f02"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#81bdbae34cb99204badaa0353faf1e4caa02dbcf"
 dependencies = [
  "anyhow",
  "indexmap 1.9.3",
@@ -7184,7 +7280,7 @@ dependencies = [
 [[package]]
 name = "turbopack-dev-server"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#157890610d0d023cf40020b001c033c023151f02"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#81bdbae34cb99204badaa0353faf1e4caa02dbcf"
 dependencies = [
  "anyhow",
  "async-compression",
@@ -7220,7 +7316,7 @@ dependencies = [
 [[package]]
 name = "turbopack-ecmascript"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#157890610d0d023cf40020b001c033c023151f02"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#81bdbae34cb99204badaa0353faf1e4caa02dbcf"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -7255,7 +7351,7 @@ dependencies = [
 [[package]]
 name = "turbopack-ecmascript-hmr-protocol"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#157890610d0d023cf40020b001c033c023151f02"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#81bdbae34cb99204badaa0353faf1e4caa02dbcf"
 dependencies = [
  "serde",
  "serde_json",
@@ -7266,7 +7362,7 @@ dependencies = [
 [[package]]
 name = "turbopack-ecmascript-plugins"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#157890610d0d023cf40020b001c033c023151f02"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#81bdbae34cb99204badaa0353faf1e4caa02dbcf"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -7290,7 +7386,7 @@ dependencies = [
 [[package]]
 name = "turbopack-ecmascript-runtime"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#157890610d0d023cf40020b001c033c023151f02"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#81bdbae34cb99204badaa0353faf1e4caa02dbcf"
 dependencies = [
  "anyhow",
  "indoc",
@@ -7306,7 +7402,7 @@ dependencies = [
 [[package]]
 name = "turbopack-env"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#157890610d0d023cf40020b001c033c023151f02"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#81bdbae34cb99204badaa0353faf1e4caa02dbcf"
 dependencies = [
  "anyhow",
  "indexmap 1.9.3",
@@ -7322,7 +7418,7 @@ dependencies = [
 [[package]]
 name = "turbopack-image"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#157890610d0d023cf40020b001c033c023151f02"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#81bdbae34cb99204badaa0353faf1e4caa02dbcf"
 dependencies = [
  "anyhow",
  "base64 0.21.4",
@@ -7341,7 +7437,7 @@ dependencies = [
 [[package]]
 name = "turbopack-json"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#157890610d0d023cf40020b001c033c023151f02"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#81bdbae34cb99204badaa0353faf1e4caa02dbcf"
 dependencies = [
  "anyhow",
  "serde",
@@ -7356,7 +7452,7 @@ dependencies = [
 [[package]]
 name = "turbopack-mdx"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#157890610d0d023cf40020b001c033c023151f02"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#81bdbae34cb99204badaa0353faf1e4caa02dbcf"
 dependencies = [
  "anyhow",
  "mdxjs",
@@ -7371,7 +7467,7 @@ dependencies = [
 [[package]]
 name = "turbopack-node"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#157890610d0d023cf40020b001c033c023151f02"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#81bdbae34cb99204badaa0353faf1e4caa02dbcf"
 dependencies = [
  "anyhow",
  "async-stream",
@@ -7405,7 +7501,7 @@ dependencies = [
 [[package]]
 name = "turbopack-nodejs"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#157890610d0d023cf40020b001c033c023151f02"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#81bdbae34cb99204badaa0353faf1e4caa02dbcf"
 dependencies = [
  "anyhow",
  "indexmap 1.9.3",
@@ -7425,7 +7521,7 @@ dependencies = [
 [[package]]
 name = "turbopack-resolve"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#157890610d0d023cf40020b001c033c023151f02"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#81bdbae34cb99204badaa0353faf1e4caa02dbcf"
 dependencies = [
  "anyhow",
  "indexmap 1.9.3",
@@ -7443,7 +7539,7 @@ dependencies = [
 [[package]]
 name = "turbopack-static"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#157890610d0d023cf40020b001c033c023151f02"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#81bdbae34cb99204badaa0353faf1e4caa02dbcf"
 dependencies = [
  "anyhow",
  "serde",
@@ -7459,7 +7555,7 @@ dependencies = [
 [[package]]
 name = "turbopack-swc-utils"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#157890610d0d023cf40020b001c033c023151f02"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#81bdbae34cb99204badaa0353faf1e4caa02dbcf"
 dependencies = [
  "swc_core",
  "turbo-tasks",
@@ -7470,7 +7566,7 @@ dependencies = [
 [[package]]
 name = "turbopack-trace-utils"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#157890610d0d023cf40020b001c033c023151f02"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#81bdbae34cb99204badaa0353faf1e4caa02dbcf"
 dependencies = [
  "anyhow",
  "crossbeam-channel",
@@ -7486,7 +7582,7 @@ dependencies = [
 [[package]]
 name = "turbopack-wasm"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#157890610d0d023cf40020b001c033c023151f02"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/aggregation-refactor#81bdbae34cb99204badaa0353faf1e4caa02dbcf"
 dependencies = [
  "anyhow",
  "indexmap 1.9.3",
@@ -7638,6 +7734,18 @@ name = "unsafe-libyaml"
 version = "0.2.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ab4c90930b95a82d00dc9e9ac071b4991924390d46cbd0dfe566148667605e4b"
+
+[[package]]
+name = "untrusted"
+version = "0.7.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a156c684c91ea7d62626509bce3cb4e1d9ed5c4d978f7b4352658f96a4c26b4a"
+
+[[package]]
+name = "untrusted"
+version = "0.9.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8ecb6da28b8a351d773b68d5825ac39017e680750f980f3a1a85cd8dd28a47c1"
 
 [[package]]
 name = "url"
@@ -8371,6 +8479,25 @@ dependencies = [
  "url",
  "walkdir",
  "wasmer-toml",
+]
+
+[[package]]
+name = "webpki"
+version = "0.22.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ed63aea5ce73d0ff405984102c42de94fc55a6b75765d621c65262469b3c9b53"
+dependencies = [
+ "ring 0.17.8",
+ "untrusted 0.9.0",
+]
+
+[[package]]
+name = "webpki-roots"
+version = "0.22.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b6c71e40d7d2c34a5106301fb632274ca37242cd0c9d3e64dbece371a40a2d87"
+dependencies = [
+ "webpki",
 ]
 
 [[package]]
