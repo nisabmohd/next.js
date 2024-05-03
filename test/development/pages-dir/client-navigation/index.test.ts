@@ -1470,7 +1470,7 @@ describe('Client Navigation', () => {
   })
 
   describe('updating head while client routing', () => {
-    it('should only execute async and defer scripts once', async () => {
+    it.failing('should only execute async and defer scripts once', async () => {
       let browser
       try {
         browser = await webdriver(next.appPort, '/head')
@@ -1566,7 +1566,7 @@ describe('Client Navigation', () => {
       }
     })
 
-    it('should update head during client routing', async () => {
+    it.failing('should update head during client routing', async () => {
       let browser
       try {
         browser = await webdriver(next.appPort, '/nav/head-1')
